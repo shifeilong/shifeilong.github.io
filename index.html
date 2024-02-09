@@ -34,13 +34,30 @@
         #message {
             display: inline-block;
         }
+
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            z-index: 2;
+        }
     </style>
 </head>
 
 <body>
 
+    <div id="loader">Loading...</div>
+
     <video id="video-background" autoplay muted loop>
-        <source src="myjiao.mp4" type="video/mp4">
+        <source src="myjiao.MP4" type="video/mp4">
         您的浏览器不支持视频标签。
     </video>
 
@@ -50,20 +67,7 @@
         <script>
             const messages = [
                 { text: "我的乖乖，新年快乐", color: "#ff0000" },
-                { text: "亲爱的娇娇，新的一年里，愿我们如龙腾飞，力量无穷。", color: "#0000ff" },
-                { text: "如龙戏珠，欢笑不断。", color: "#ff00ff" },
-                { text: "在生活的每一个瞬间，都能感受到彼此的温暖与陪伴。", color: "#ffff00" },
-                { text: "龙年快乐，我的爱人！", color: "#ff8000" },
-                { text: "龙年行大运，愿你我如双龙戏珠般相依相伴。", color: "#8000ff" },
-                { text: "新的一年里，愿你的笑容如春花般绽放，生活如诗画般美好。", color: "#0080ff" },
-                { text: "我爱你，龙年快乐！", color: "#ff0080" },
-                { text: "偷偷许个愿：希望今年陪我的你，明年还在我身边。", color: "#80ff00" },
-                { text: "小手一牵陪你今年、明年、岁岁年年，往后余生，愿始终陪你左右。", color: "#008080" },
-                { text: "新的一年也要陪你走过大街小巷、东南西北。", color: "#800080" },
-                { text: "2024年的顺序是：想你、见你、抱你、爱你。", color: "#ff8000" },
-                { text: "所有人都祝你新年快乐，我祝你年年有我、永不分离。", color: "#ff0000" },
-                { text: "爱你的龙哥！！！！！", color: "#00ff00" },
-                { text: "永远爱你，duaiduai", color: "#ffff00" },
+                // ... 其他消息
             ];
 
             function applyStyle(message) {
@@ -92,9 +96,20 @@
                 }, 5000); // 根据需要调整间隔
             }
 
+            // 等待视频加载完毕
+            const video = document.getElementById('video-background');
+            video.addEventListener('canplaythrough', function () {
+                // 隐藏加载器
+                document.getElementById('loader').style.display = 'none';
+                
+                // 显示文字
+                showText();
+            });
+
             // 页面加载事件监听器
             window.onload = function () {
-                showText();
+                // 显示加载器，直到视频加载完毕
+                document.getElementById('loader').style.display = 'flex';
             };
         </script>
     </div>
